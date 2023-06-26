@@ -15,7 +15,7 @@ namespace TF_NET_Angular_RCD_Bibliotheque.DAL.Repositories
 
         public int AvgNotice(int movieId)
         {
-            var result = _entities.Include(n => n.Movie)
+            IEnumerable<int> result = _entities.Include(n => n.Movie)
                 .Where(n => n.Movie.Id == movieId)
                 .Select(n => n.Note);
             

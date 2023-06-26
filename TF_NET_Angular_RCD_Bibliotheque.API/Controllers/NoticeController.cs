@@ -21,7 +21,8 @@ namespace TF_NET_Angular_RCD_Bibliotheque.API.Controllers
         {
             try
             {
-                return Ok(_noticeService.Add(notice));
+                int id = _noticeService.Add(notice).Id;
+                return Created($"/api/notice/{id}",id);
 
             }
             catch (Exception ex)
