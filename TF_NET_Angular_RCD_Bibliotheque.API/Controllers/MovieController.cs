@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TF_NET_Angular_RCD_Bibliotheque.BLL.Services;
 using TF_NET_Angular_RCD_Bibliotheque.Models.DTOs.Cutomers;
 using TF_NET_Angular_RCD_Bibliotheque.Models.DTOs.Movies;
-using TF_NET_Angular_RCD_Bibliotheque.Models.enums;
 
 namespace TF_NET_Angular_RCD_Bibliotheque.API.Controllers
 {
@@ -33,16 +31,9 @@ namespace TF_NET_Angular_RCD_Bibliotheque.API.Controllers
             }
         }
 
-        [HttpGet("{title?}/{release?}/{genre?}/{cote?}")]
-        public IActionResult GetOne([FromRoute] string? title = null, [FromRoute] int? release = null, [FromRoute] int? genre = null, [FromRoute] int? cote = null)
+        [HttpGet]
+        public IActionResult GetOne([FromQuery] MovieSearchDTO filter)
         {
-            MovieSearchDTO filter = new MovieSearchDTO()
-            {
-                Title = title,
-                Release = release,
-                Genre = (GenreType)genre,
-                NoteAvg = cote,
-            };
             return Ok(_movieService.GetMany(filter));
         }
 
